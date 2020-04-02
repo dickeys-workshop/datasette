@@ -47,7 +47,7 @@ def test_homepage(app_client_two_attached_databases):
 
 
 def test_http_head(app_client):
-    response = app_client.get("/", method="HEAD")
+    response = app_client.head("/")
     assert response.status == 200
 
 

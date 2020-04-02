@@ -42,7 +42,11 @@ class TestClient:
 
     @async_to_sync
     async def get(self, path, allow_redirects=True, redirect_count=0):
-        return await self._request(path, allow_redirects, redirect_count, method="GET")
+        return await self._request(path, allow_redirects, redirect_count, method=method)
+
+    @async_to_sync
+    async def head(self, path, allow_redirects=True, redirect_count=0):
+        return await self._request(path, allow_redirects, redirect_count, method="HEAD")
 
     @async_to_sync
     async def post(self, path, post_vars=None):
@@ -103,8 +107,11 @@ class TestClient:
                 redirect_count, self.max_redirects
             )
             location = response.headers["Location"]
-            return await self._get(
-                location, allow_redirects=True, redirect_count=redirect_count + 1
+            return await self._request(
+                location,
+                allow_redirects=True,
+                redirect_count=redirect_count + 1,
+                method="GET",
             )
         return response
 
