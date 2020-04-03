@@ -516,10 +516,10 @@ class DataView(BaseView):
                 )
                 return self.redirect(request, request.path)
             else:
-
                 async def extra_template():
                     return {
                         "request": request,
+                        "form_method": "POST",
                         "path_with_added_args": path_with_added_args,
                         "path_with_removed_args": path_with_removed_args,
                         "named_parameter_values": named_parameter_values,
